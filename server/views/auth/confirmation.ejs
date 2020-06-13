@@ -1,0 +1,28 @@
+<% include ../partials/auth/header %>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+	<h1><span class="fa fa-check-double"></span> Comfirmation</h1>
+	
+	    <% include ../partials/flash %>
+
+
+        <form action="/user/confirmation" method="POST" role="form">
+            <div class="form-group col-md-12">
+                <label for="exampleInputEmail1">Email Address</label>
+                <input type="email" class="form-control" name="email" id="exampleInputEmail1" value='<%= email %>'>
+            </div> <!-- end form-group -->
+            <div class="form-group col-md-12">
+                <label for="token">Token</label>
+                <input type="text" class="form-control" name="token" id="token" placeholder="Token" required="" value='<%= token %>'>
+            </div> <!-- end form-group -->
+
+            <div class="text-center col-md-12 mt10 mb20">
+                <button type="submit" class="btn se-btn btn-rounded">Submit</button>
+            </div> <!-- end text-center -->
+        </form>
+
+	<hr>
+
+<% include ../partials/auth/footer %>

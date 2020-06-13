@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<% include ../partials/errors/header %>
+<body class="four-zero-four">
+    <div class="four-zero-four-container">
+        <div class="error-code"><%= errorCode %></div>
+        <div class="error-message">Bad request</div>
+        <br><br><br>
+        <div class="error-message"><%= message %></div>
+        <div class="button-place">
+            <a href="/" class="btn btn-default btn-lg waves-effect">GO TO HOMEPAGE</a>
+        </div>
+    </div>
+
+<% include ../partials/errors/footer %>
+
+</html>

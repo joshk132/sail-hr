@@ -1,0 +1,58 @@
+<% include ../partials/header %>
+
+
+            <!-- Basic Examples -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% for (var user of users) { %>
+                                        <tr>
+                                            <td><%= user.email%></td>
+                                            <td><%= user.employee.personal.firstName %></td>
+                                            <td><%= user.employee.personal.lastName %></td>
+                                            <td>23</td>
+                                            <td>2010/09/20</td>
+                                            <td>
+                                                <form id="delete-form" action="/user/delete/<%= user.id %>" method="POST" style="display:inline;">
+                                                    <button type="submit" class="btn btn-danger"><i class="material-icons">delete</i></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Basic Examples -->
+
+
+
+
+<% include ../partials/footer %>

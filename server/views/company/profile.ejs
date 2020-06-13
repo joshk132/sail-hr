@@ -1,0 +1,102 @@
+<% include ../partials/header %>
+
+<div class="row">
+    
+    <div class="col-md-9">
+        <div class=container> 
+            <br>
+            <div class="row clearfix">
+                <form action="/company/profile" method="POST">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="body">
+                                <h1 class="text-center">Create your company profile</h1>
+                                <!-- START COMPANY PROFILE-->
+                                <hr>
+                                <!-- Start row 1-->
+                                <div class="row clearfix">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <h3 class="card-inside-title text-center">Company Name</h3>
+                                            <div class="form-line">
+                                                <input type="text" class="form-control text-center" name="companyName" value="<%= currentUser.company.companyName %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                                <!-- End row 1-->
+                                <!-- Start row 2-->
+                                <div class="row clearfix">
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <h3 class="card-inside-title text-center">Domain</h3>
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="companyDomain" value="<%= currentUser.company.companyDomain %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <h3 class="card-inside-title text-center">Address</h3>
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="companyAddress" value="<%= currentUser.company.companyAddress %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <h3 class="card-inside-title text-center">Employee Count</h3>
+                                            <div class="form-line">
+                                                <input type="number" class="form-control" name="companySize" value="<%= currentUser.company.companySize %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End row 2-->
+                                <!-- END COMPANY PROFILE-->
+                                
+                                
+                                <!-- START SUBMIT BUTTON -->
+                                <div class="row clearfix">
+                                    <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <input type="submit" class="btn btn-block btn-lg btn-primary waves-effect">
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div> 
+                                <!-- END SUBMIT BUTTON -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Logo Upload</h2>
+                        </div>
+                        <div class="body">
+                            <form action="/company/logo" method="POST" id="logo" class="dropzone"  enctype="multipart/form-data">
+                                <div class="dz-message">
+                                    <div class="drag-icon-cph">
+                                        <i class="material-icons">touch_app</i>
+                                    </div>
+                                    <h3>Drop files here or click to upload.</h3>
+                                    <em>You can only upload image files.</em>
+                                </div>
+                                <div class="fallback">
+                                    <input name="file" type="file" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

@@ -1,0 +1,431 @@
+<% include ../partials/header %>
+
+
+<div class="row">
+    
+    <div class="col-md-9">
+        <div class=container> 
+            <br>
+            <div class="row clearfix">
+                <form action="/user/new" method="POST">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="body">
+                            <h1 class="text-center">Create a new user</h1>
+                            <hr>
+                            <h2 class="text-center">Login Details</h2>
+                            <hr>
+                            <!-- START LOGIN DETAILS-->
+                            <!-- Start row 1-->
+                            <div class="row clearfix">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">User's email (used for login)</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="email" placeholder="User's email address" required oninvalid="this.setCustomValidity('You must enter an email.')" oninput="this.setCustomValidity('')">
+                                        </div>
+                                        <span class="input-group-addon">@<%= currentUser.company.companyDomain %></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <!-- End row 1-->
+                            <!-- Start row 2-->
+                            <div class="row clearfix">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Temporary password</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="password" class="form-control" name="password" placeholder="Enter temporary password" required oninvalid="this.setCustomValidity('You must set a temporary password.')" oninput="this.setCustomValidity('')">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <!-- End row 2-->
+                            <!-- Start row 3-->
+                            <div class="row clearfix">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Employee Type</h3>
+                                    <% if (currentUser.role == 'company') { %>
+                                    <div class="demo-checkbox text-center">
+                                        <input type="checkbox" name="hrRole" id="role" />
+                                        <label for="role">HR</label>
+                                    </div>
+                                    <% } %>
+                                    <% if (currentUser.role == 'hr' || currentUser.role === 'hrManager' || currentUser.role == 'company') { %>
+                                    <div class="demo-switch text-center">
+                                        <div class="switch">
+                                            <label>Manager<input type="checkbox" name="role" checked><span class="lever"></span>Employee</label>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">User's Manager</h3>
+                                    <select class="form-control show-tick" name="manager"  data-live-search="true">
+                                        <% managers.forEach(function(manager) { %>
+                                        <option value="<%= manager.id %>"><%= manager.firstName %> <%= manager.lastName%></option>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <!-- End row 3-->
+                            <!-- END LOGIN DETAILS-->
+                            
+                            
+                            <!-- START USER PROFILE BASIC -->
+                            <hr>
+                            <h2 class="text-center">Personal Details</h2>
+                            <hr>
+                            <!-- Start row 1-->
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">First Name</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="first" placeholder="First Name" required oninvalid="this.setCustomValidity('You must set a first name for this user.')" oninput="this.setCustomValidity('')">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Middle Name</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="middle" placeholder="Middle Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Last Name</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="last" placeholder="Last Name" required oninvalid="this.setCustomValidity('You must set a last name for this user.')" oninput="this.setCustomValidity('')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End row 1-->
+                            <!-- Start row 2-->
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Birth date</h3>
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="birthDate">
+                                            <label class="form-label">Date</label>
+                                        </div>
+                                        <div class="help-info">YYYY-MM-DD format</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Social Number</h3>
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="social">
+                                            <label class="form-label">Social Number</label>
+                                            <div class="help-info">XXX-XXX-XXX format</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Gender</h3>
+                                    <div class="demo-switch text-center">
+                                        <div class="switch">
+                                            <label>Male<input type="checkbox" name="gender" checked><span class="lever"></span>Female</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End row 2-->
+                            <!-- Start row 3-->
+                            <div class="row clearfix">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Address</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="address" placeholder="Address">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Marital Status</h3>
+                                    <select class="form-control show-tick" name="marital">
+                                        <option value="Married">Married</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <!-- End row 3-->
+                            <!-- END USER PROFILE BASIC -->
+                            
+                            
+                            <!-- START USER EMPLOYEE DATA-->
+                            <hr>
+                            <h2 class="text-center">Employee Data</h2>
+                            <hr>
+                            <!-- Start row 1-->
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <h3 class="card-inside-title text-center">Employee ID</h3>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="employeeID" placeholder="Employee ID">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <h3 class="card-inside-title text-center">Employment Type</h3>
+                                        <select class="form-control show-tick" name="employmentType">
+                                            <option value="Part time">Part Time</option>
+                                            <option value="Full time" selected>Full Time</option>
+                                            <option value="Contract">Contract</option>
+                                            <option value="Fixed contract">Fixed Contract</option>
+                                            <option value="Casual">Casual</option>
+                                            <option value="Apprentice">Apprentice</option>
+                                            <option value="Commission">Commission</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Financial Plan Enrollment</h3>
+                                    <div class="demo-switch text-center">
+                                        <div class="switch">
+                                            <label>Enrolled<input type="checkbox" name="financialPlanEnrollMent" checked><span class="lever"></span>Not Enrolled</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End row 1-->
+                            <!-- Start row 2-->
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Hire Date</h3>
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="hireDate">
+                                            <label class="form-label">Date</label>
+                                        </div>
+                                        <div class="help-info">YYYY-MM-DD format</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Final Day</h3>
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="leavingDate">
+                                            <label class="form-label">Date</label>
+                                        </div>
+                                        <div class="help-info">YYYY-MM-DD format</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Training Due</h3>
+                                    <div class="demo-switch text-center">
+                                        <div class="switch">
+                                            <label>Training Due<input type="checkbox" name="trainingDue" checked><span class="lever"></span>Nothing Due</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End row 2 -->
+                            <!-- Start row 3 -->
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <h3 class="card-inside-title text-center">Job Title</h3>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="jobTitle" placeholder="Job Title">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <h3 class="card-inside-title text-center">Department</h3>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="department" placeholder="Department">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <h3 class="card-inside-title text-center">Location / Office</h3>
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="location" placeholder="Location">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End row 3 -->
+                            <!-- END USER EMPLOYEE DATA-->
+                            
+                            
+                            <!-- START USER CONTACT INFO -->
+                            <hr>
+                            <h2 class="text-center">Contact Info</h2>
+                            <hr>
+                            <!-- Start row 1-->
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Home Phone Number</h3>
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">phone_iphone</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input type="text" class="form-control mobile-phone-number" name="home" placeholder="(000) 000-00-00">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Cell Phone Number</h3>
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">phone_iphone</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input type="text" class="form-control mobile-phone-number" name="cell" placeholder="(000) 000-00-00">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Personal Email Address</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="email" class="form-control" name="personalEmailemail" placeholder="Personal email address">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End row 1-->
+                            <!-- Start row 2-->
+                            <div class="row clearfix">
+                                <h2 class="card-inside-title text-center">Emergency Contact</h2>
+                                <hr>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">First Name</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="emergencyContactPhoneFist" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Last Name</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="emergencyContactPhoneLast" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Phone Number</h3>
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">phone_iphone</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input type="text" class="form-control mobile-phone-number" name="emergencyContactPhone" placeholder="(000) 000-00-00">
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <!-- End row 2-->
+                            <!-- END USER CONTACT INFO -->
+                            
+                            
+                            <!-- START USER EDUCATION-->
+                            <hr>
+                            <h2 class="text-center">Education</h2>
+                            <hr>
+                            <!-- Start row 1-->
+                            <div class="row clearfix">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Cerifications</h3>
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="certs" placeholder="Certifications">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                        <h3 class="card-inside-title text-center">Post Secondary</h3>
+                                        <select class="form-control show-tick" name="postSecondary">
+                                            <option value="None">No Post Secondary</option>
+                                            <option value="Associate">Associate Degree</option>
+                                            <option value="Bachelor">Bachelor Degree</option>
+                                            <option value="Graduate">Graduate Degree</option>
+                                            <option value="Professional">Professional Degree</option>
+                                        </select>
+                                <div class="col-md-2"></div>
+                                </div>
+                            </div>
+                            <!-- End row 1-->
+                            <!-- END USER EDUCATION-->
+                            
+                            
+                            <!-- START USER CLOTHING-->
+                            <hr>
+                            <h2 class="text-center">Clothing</h2>
+                            <hr>
+                            <!-- Start row 1-->
+                            <div class="row clearfix">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <h3 class="card-inside-title text-center">Shirt Size</h3>
+                                    <select class="form-control show-tick" name="shirtSize">
+                                        <option value="XS">XS</option>
+                                        <option value="S">S</option>
+                                        <option value="M" selected>M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="XXL">XXL</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <h3 class="card-inside-title text-center">Pant Size</h3>
+                                        <div class="form-line">
+                                            <input type="number" class="form-control" name="pantSize" placeholder="Pant Size">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <!-- End row 1-->
+                            <!-- END USER CLOTHING-->
+                            
+                            
+                            <!-- START SUBMIT BUTTON -->
+                            <div class="row clearfix">
+                                <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <input type="submit" class="btn btn-block btn-lg btn-primary waves-effect">
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div> 
+                            <!-- END SUBMIT BUTTON -->
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<% include ../partials/footer %>
